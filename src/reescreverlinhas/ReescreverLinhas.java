@@ -27,16 +27,23 @@ public class ReescreverLinhas {
                 .resolve("Teste.txt");
        
         //3.2
-        File arquivo = new File("Q1.txt");
-        FileOutputStream saida = new FileOutputStream( new File("Q1.txt") );
-        BufferedOutputStream escrita = new BufferedOutputStream(saida);
-        escrita.write( "questao1_prova".getBytes()); 
+        
+
+        try(BufferedOutputStream escrita = new BufferedOutputStream(new FileOutputStream( new File("Q1.txt")))) {
+                escrita.write( "questao1_prova".getBytes());     
+        } catch (IOException e) {
+	    System.out.println("Erro de I/O.");
+        }
+         
 
         //3.3
-        File arquivo = new File("Q1.txt");
-        FileReader entrada = new FileReader(arquivo);
-        BufferedReader leitura = new BufferedReader(fr); 
+        try (FileReader entrada = new FileReader(new File("Q1.txt")); 
+                BufferedReader leitura = new BufferedReader(entrada)){
+            
+            System.out.println("teste");
+            
+        } catch (IOException e) {
+	    System.out.println("Erro de I/O.");
+        }
 
     }
-    
-}
